@@ -6,3 +6,4 @@ coverage.xml
 htmlcov/
 bandit-report.*
 .pytest_cache/
+.DS_Store
