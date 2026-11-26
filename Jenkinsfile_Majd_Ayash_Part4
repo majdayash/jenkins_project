@@ -1,0 +1,98 @@
+pipeline {
+    agent any
+
+    environment {
+        VIRTUAL_ENV = 'venv'
+        DEPLOY_DIR  = "${env.HOME}/jenkins_deployments/python-ci-cd"
+    }
+
+    stages {
+        stage('Setup') {
+            steps {
+                script {
+                    if (!fileExists("${env.WORKSPACE}/${VIRTUAL_ENV}")) {
+                        sh "python3 -m venv ${VIRTUAL_ENV}"
+                    }
+                    sh ". ${VIRTUAL_ENV}/bin/activate && pip install -r requirements.txt"
+                }
+            }
+        }
+
+        stage('Lint') {
+            steps {
+                script {
+                    sh ". ${VIRTUAL_ENV}/bin/activate && flake8 app.py"
+                }
+            }
+        }
+
+        stage('Test') {
+            steps {
+                script {
+                    sh ". ${VIRTUAL_ENV}/bin/activate && pytest"
+                }
+            }
+        }
+
+        // NEW (Part 4, Step 1): code coverage with coverage.py
+        stage('Coverage') {
+            steps {
+                script {
+                    sh """
+                        . ${VIRTUAL_ENV}/bin/activate
+                        coverage run --source=app -m pytest
+                        coverage report -m
+                        coverage xml -o coverage.xml
+                        coverage html -d htmlcov
+                    """
+                }
+            }
+            post {
+                always {
+                    archiveArtifacts artifacts: 'coverage.xml, htmlcov/**', allowEmptyArchive: true
+                }
+            }
+        }
+
+        // NEW (Part 4, Step 2): security scanning with bandit
+        stage('Security Scan') {
+            steps {
+                script {
+                    sh """
+                        . ${VIRTUAL_ENV}/bin/activate
+                        bandit -r app.py -f txt -o bandit-report.txt || BANDIT_STATUS=\$?
+                        cat bandit-report.txt
+                        exit \${BANDIT_STATUS:-0}
+                    """
+                }
+            }
+            post {
+                always {
+                    archiveArtifacts artifacts: 'bandit-report.txt', allowEmptyArchive: true
+                }
+            }
+        }
+
+        // UPDATED (Part 4, Step 3): real local deployment via deploy.sh
+        stage('Deploy') {
+            steps {
+                script {
+                    echo "Deploying application..."
+                    sh "PYTHON=${VIRTUAL_ENV}/bin/python sh deploy.sh"
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo "Pipeline finished: all stages passed."
+        }
+        failure {
+            echo "Pipeline failed - check the stage logs above."
+        }
+        always {
+            cleanWs()
+        }
+    }
+}
