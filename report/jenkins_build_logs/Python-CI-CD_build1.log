@@ -1,0 +1,208 @@
+Started Python-CI-CD #1
+Started from command line by admin
+Obtained Jenkinsfile_Majd_Ayash from git https://github.com/majdayash/jenkins_project.git
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /Users/majdayash/.jenkins/workspace/Python-CI-CD
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+Cloning the remote Git repository
+Cloning repository https://github.com/majdayash/jenkins_project.git
+ > git init /Users/majdayash/.jenkins/workspace/Python-CI-CD # timeout=10
+Fetching upstream changes from https://github.com/majdayash/jenkins_project.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.50.1 (Apple Git-155)'
+ > git fetch --tags --force --progress -- https://github.com/majdayash/jenkins_project.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git config remote.origin.url https://github.com/majdayash/jenkins_project.git # timeout=10
+ > git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+Avoid second fetch
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision be2ffed2c0a92f47beb7ccf3ac9a2785c4e8b876 (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f be2ffed2c0a92f47beb7ccf3ac9a2785c4e8b876 # timeout=10
+Commit message: "Part 4: add Coverage and Security Scan stages and local deploy script"
+First time build. Skipping changelog.
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Setup)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] fileExists
+[Pipeline] sh
++ python3 -m venv venv
+[Pipeline] sh
++ . venv/bin/activate
+++ deactivate nondestructive
+++ '[' -n '' ']'
+++ '[' -n '' ']'
+++ '[' -n /bin/sh -o -n '' ']'
+++ hash -r
+++ '[' -n '' ']'
+++ unset VIRTUAL_ENV
+++ '[' '!' nondestructive = nondestructive ']'
+++ VIRTUAL_ENV=/Users/majdayash/.jenkins/workspace/Python-CI-CD/venv
+++ export VIRTUAL_ENV
+++ _OLD_VIRTUAL_PATH=/usr/bin:/bin:/usr/sbin:/sbin
+++ PATH=/Users/majdayash/.jenkins/workspace/Python-CI-CD/venv/bin:/usr/bin:/bin:/usr/sbin:/sbin
+++ export PATH
+++ '[' -n '' ']'
+++ '[' -z '' ']'
+++ _OLD_VIRTUAL_PS1=
+++ PS1='(venv) '
+++ export PS1
+++ '[' -n /bin/sh -o -n '' ']'
+++ hash -r
++ pip install -r requirements.txt
+Collecting flake8
+  Using cached flake8-7.3.0-py2.py3-none-any.whl (57 kB)
+Collecting pytest
+  Using cached pytest-8.4.2-py3-none-any.whl (365 kB)
+Collecting coverage
+  Using cached coverage-7.10.7-cp39-cp39-macosx_11_0_arm64.whl (218 kB)
+Collecting bandit
+  Using cached bandit-1.8.6-py3-none-any.whl (133 kB)
+Collecting pycodestyle<2.15.0,>=2.14.0
+  Using cached pycodestyle-2.14.0-py2.py3-none-any.whl (31 kB)
+Collecting pyflakes<3.5.0,>=3.4.0
+  Using cached pyflakes-3.4.0-py2.py3-none-any.whl (63 kB)
+Collecting mccabe<0.8.0,>=0.7.0
+  Using cached mccabe-0.7.0-py2.py3-none-any.whl (7.3 kB)
+Collecting exceptiongroup>=1
+  Using cached exceptiongroup-1.3.2-py3-none-any.whl (16 kB)
+Collecting pluggy<2,>=1.5
+  Using cached pluggy-1.6.0-py3-none-any.whl (20 kB)
+Collecting pygments>=2.7.2
+  Using cached pygments-2.21.0-py3-none-any.whl (1.3 MB)
+Collecting iniconfig>=1
+  Using cached iniconfig-2.1.0-py3-none-any.whl (6.0 kB)
+Collecting tomli>=1
+  Using cached tomli-2.5.0-py3-none-any.whl (14 kB)
+Collecting packaging>=20
+  Using cached packaging-26.3-py3-none-any.whl (129 kB)
+Collecting rich
+  Using cached rich-15.0.0-py3-none-any.whl (310 kB)
+Collecting stevedore>=1.20.0
+  Using cached stevedore-5.5.0-py3-none-any.whl (49 kB)
+Collecting PyYAML>=5.3.1
+  Using cached pyyaml-6.0.3-cp39-cp39-macosx_11_0_arm64.whl (174 kB)
+Collecting typing-extensions>=4.6.0
+  Using cached typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+Collecting markdown-it-py>=2.2.0
+  Using cached markdown_it_py-3.0.0-py3-none-any.whl (87 kB)
+Collecting mdurl~=0.1
+  Using cached mdurl-0.1.2-py3-none-any.whl (10.0 kB)
+Installing collected packages: mdurl, typing-extensions, pygments, markdown-it-py, tomli, stevedore, rich, PyYAML, pyflakes, pycodestyle, pluggy, packaging, mccabe, iniconfig, exceptiongroup, pytest, flake8, coverage, bandit
+Successfully installed PyYAML-6.0.3 bandit-1.8.6 coverage-7.10.7 exceptiongroup-1.3.2 flake8-7.3.0 iniconfig-2.1.0 markdown-it-py-3.0.0 mccabe-0.7.0 mdurl-0.1.2 packaging-26.3 pluggy-1.6.0 pycodestyle-2.14.0 pyflakes-3.4.0 pygments-2.21.0 pytest-8.4.2 rich-15.0.0 stevedore-5.5.0 tomli-2.5.0 typing-extensions-4.16.0
+WARNING: You are using pip version 21.2.4; however, version 26.0.1 is available.
+You should consider upgrading via the '/Users/majdayash/.jenkins/workspace/Python-CI-CD/venv/bin/python3 -m pip install --upgrade pip' command.
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Lint)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] sh
++ . venv/bin/activate
+++ deactivate nondestructive
+++ '[' -n '' ']'
+++ '[' -n '' ']'
+++ '[' -n /bin/sh -o -n '' ']'
+++ hash -r
+++ '[' -n '' ']'
+++ unset VIRTUAL_ENV
+++ '[' '!' nondestructive = nondestructive ']'
+++ VIRTUAL_ENV=/Users/majdayash/.jenkins/workspace/Python-CI-CD/venv
+++ export VIRTUAL_ENV
+++ _OLD_VIRTUAL_PATH=/usr/bin:/bin:/usr/sbin:/sbin
+++ PATH=/Users/majdayash/.jenkins/workspace/Python-CI-CD/venv/bin:/usr/bin:/bin:/usr/sbin:/sbin
+++ export PATH
+++ '[' -n '' ']'
+++ '[' -z '' ']'
+++ _OLD_VIRTUAL_PS1=
+++ PS1='(venv) '
+++ export PS1
+++ '[' -n /bin/sh -o -n '' ']'
+++ hash -r
++ flake8 app.py
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Test)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] sh
++ . venv/bin/activate
+++ deactivate nondestructive
+++ '[' -n '' ']'
+++ '[' -n '' ']'
+++ '[' -n /bin/sh -o -n '' ']'
+++ hash -r
+++ '[' -n '' ']'
+++ unset VIRTUAL_ENV
+++ '[' '!' nondestructive = nondestructive ']'
+++ VIRTUAL_ENV=/Users/majdayash/.jenkins/workspace/Python-CI-CD/venv
+++ export VIRTUAL_ENV
+++ _OLD_VIRTUAL_PATH=/usr/bin:/bin:/usr/sbin:/sbin
+++ PATH=/Users/majdayash/.jenkins/workspace/Python-CI-CD/venv/bin:/usr/bin:/bin:/usr/sbin:/sbin
+++ export PATH
+++ '[' -n '' ']'
+++ '[' -z '' ']'
+++ _OLD_VIRTUAL_PS1=
+++ PS1='(venv) '
+++ export PS1
+++ '[' -n /bin/sh -o -n '' ']'
+++ hash -r
++ pytest
+============================= test session starts ==============================
+platform darwin -- Python 3.9.6, pytest-8.4.2, pluggy-1.6.0
+rootdir: /Users/majdayash/.jenkins/workspace/Python-CI-CD
+collected 1 item
+
+tests/test_app.py .                                                      [100%]
+
+============================== 1 passed in 0.00s ===============================
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deploy)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] echo
+Deploying application...
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Declarative: Post Actions)
+[Pipeline] cleanWs
+[WS-CLEANUP] Deleting project workspace...
+[WS-CLEANUP] Deferred wipeout is used...
+[WS-CLEANUP] done
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
+Completed Python-CI-CD #1 : SUCCESS
